@@ -50,14 +50,11 @@ class UserCreateUseCaseTest extends TestCase
         $this->userRepository
             ->shouldReceive('addUser')
             ->with($name, $email, $password)
-            ->andReturn($this->user);
+            ->andReturn(new User());
 
         $usecase = new AddUserUseCase($this->userRepository);
         $result = $usecase->handle($name, $email, $password);
 
-        //dd($this->user);
-
-        $this->assertInstanceOf($this->user, $result);
-
+        $this->assertInstanceOf(User::class, $result);
     }
 }
